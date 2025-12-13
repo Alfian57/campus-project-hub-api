@@ -1,4 +1,3 @@
--- +migrate Up
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 CREATE TABLE users (
@@ -24,6 +23,3 @@ CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_role ON users(role);
 CREATE INDEX idx_users_status ON users(status);
 CREATE INDEX idx_users_oauth ON users(oauth_provider, oauth_id);
-
--- +migrate Down
-DROP TABLE IF EXISTS users;

@@ -52,7 +52,7 @@ func Created(c *gin.Context, data interface{}) {
 func Error(c *gin.Context, statusCode int, message string) {
 	c.JSON(statusCode, APIResponse{
 		Success: false,
-		Error:   message,
+		Message: message,
 	})
 }
 

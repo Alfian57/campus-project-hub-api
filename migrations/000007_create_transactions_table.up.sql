@@ -1,4 +1,3 @@
--- +migrate Up
 CREATE TABLE transactions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     project_id UUID NOT NULL REFERENCES projects(id),
@@ -17,6 +16,3 @@ CREATE INDEX idx_transactions_buyer_id ON transactions(buyer_id);
 CREATE INDEX idx_transactions_seller_id ON transactions(seller_id);
 CREATE INDEX idx_transactions_status ON transactions(status);
 CREATE INDEX idx_transactions_midtrans_order_id ON transactions(midtrans_order_id);
-
--- +migrate Down
-DROP TABLE IF EXISTS transactions;

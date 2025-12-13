@@ -1,4 +1,3 @@
--- +migrate Up
 CREATE TABLE block_records (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     target_type VARCHAR(20) NOT NULL,
@@ -28,7 +27,3 @@ CREATE TABLE reports (
 CREATE INDEX idx_reports_reporter_id ON reports(reporter_id);
 CREATE INDEX idx_reports_target ON reports(target_type, target_id);
 CREATE INDEX idx_reports_status ON reports(status);
-
--- +migrate Down
-DROP TABLE IF EXISTS reports;
-DROP TABLE IF EXISTS block_records;

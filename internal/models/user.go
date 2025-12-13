@@ -34,8 +34,8 @@ type User struct {
 	Role          UserRole   `gorm:"size:20;default:'user'" json:"role"`
 	Status        UserStatus `gorm:"size:20;default:'active'" json:"status"`
 	TotalExp      int        `gorm:"default:0" json:"totalExp"`
-	OAuthProvider *string    `gorm:"size:20" json:"oauthProvider,omitempty"`
-	OAuthID       *string    `gorm:"size:255" json:"-"`
+	OAuthProvider *string    `gorm:"column:oauth_provider;size:20" json:"oauthProvider,omitempty"`
+	OAuthID       *string    `gorm:"column:oauth_id;size:255" json:"-"`
 	CreatedAt     time.Time  `gorm:"autoCreateTime" json:"createdAt"`
 	UpdatedAt     time.Time  `gorm:"autoUpdateTime" json:"updatedAt"`
 

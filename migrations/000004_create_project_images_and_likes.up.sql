@@ -1,4 +1,3 @@
--- +migrate Up
 CREATE TABLE project_images (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     project_id UUID NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
@@ -16,7 +15,3 @@ CREATE TABLE project_likes (
 );
 
 CREATE INDEX idx_project_likes_project_id ON project_likes(project_id);
-
--- +migrate Down
-DROP TABLE IF EXISTS project_likes;
-DROP TABLE IF EXISTS project_images;

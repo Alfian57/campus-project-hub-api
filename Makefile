@@ -18,7 +18,7 @@ DB_SSLMODE ?= disable
 DATABASE_URL ?= postgres://$(DB_USER):$(DB_PASSWORD)@$(DB_HOST):$(DB_PORT)/$(DB_NAME)?sslmode=$(DB_SSLMODE)
 
 # Migration
-MIGRATE=migrate
+MIGRATE=$(shell go env GOPATH)/bin/migrate
 MIGRATIONS_PATH=./migrations
 
 .PHONY: all build run test clean deps migrate-up migrate-down migrate-create migrate-force migrate-version help
