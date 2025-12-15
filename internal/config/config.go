@@ -20,10 +20,11 @@ type Config struct {
 }
 
 type AppConfig struct {
-	Name  string
-	Env   string
-	Port  int
-	Debug bool
+	Name    string
+	Env     string
+	Port    int
+	Debug   bool
+	BaseURL string
 }
 
 type DatabaseConfig struct {
@@ -93,10 +94,11 @@ func Load() (*Config, error) {
 
 	config := &Config{
 		App: AppConfig{
-			Name:  viper.GetString("app.name"),
-			Env:   viper.GetString("app.env"),
-			Port:  viper.GetInt("app.port"),
-			Debug: viper.GetBool("app.debug"),
+			Name:    viper.GetString("app.name"),
+			Env:     viper.GetString("app.env"),
+			Port:    viper.GetInt("app.port"),
+			Debug:   viper.GetBool("app.debug"),
+			BaseURL: viper.GetString("app.base_url"),
 		},
 		Database: DatabaseConfig{
 			Host:     viper.GetString("database.host"),
@@ -167,6 +169,7 @@ func bindEnvVariables() {
 	viper.BindEnv("app.env", "APP_ENV")
 	viper.BindEnv("app.port", "APP_PORT")
 	viper.BindEnv("app.debug", "APP_DEBUG")
+	viper.BindEnv("app.base_url", "APP_BASE_URL")
 
 	// Database
 	viper.BindEnv("database.host", "DB_HOST")
