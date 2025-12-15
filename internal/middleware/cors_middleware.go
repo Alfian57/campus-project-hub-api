@@ -13,8 +13,19 @@ import (
 func CORSMiddleware() gin.HandlerFunc {
 	cfg := config.GetConfig()
 
+	origins := []string{"http://localhost:3000"}
+	if cfg.CORS.FrontendURL != "" {
+		configuredOrigins := strings.Split(cfg.CORS.FrontendURL, ",")
+		for _, origin := range configuredOrigins {
+			trimmedOrigin := strings.TrimSpace(origin)
+			if trimmedOrigin != "" {
+				origins = append(origins, trimmedOrigin)
+			}
+		}
+	}
+
 	return cors.New(cors.Config{
-		AllowOrigins:     []string{cfg.CORS.FrontendURL, "http://localhost:3000"},
+		AllowOrigins:     origins,
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization", "X-Requested-With"},
 		ExposeHeaders:    []string{"Content-Length"},
