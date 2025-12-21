@@ -41,8 +41,18 @@ COPY --from=builder /app/cmd/seeder/assets ./cmd/seeder/assets
 # Create uploads directory
 RUN mkdir -p uploads && chown -R appuser:appuser /app
 
+# Copy entrypoint script
+COPY --from=builder --chown=appuser:appuser /app/entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+
 USER appuser
 
 EXPOSE 8000
 
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8000/health || exit 1
+
+# Run with entrypoint
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["./server"]
