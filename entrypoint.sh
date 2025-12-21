@@ -12,8 +12,22 @@ set -e
 
 echo "🚀 Starting Campus Project Hub API..."
 
-# Database migrations (Go uses GORM auto-migrate or manual migration)
-if [ "$RUN_SEEDER" = "true" ]; then
+# Database migrations
+if [ "$RUN_MIGRATE_FRESH" = "true" ]; then
+  echo "⚠️  WARNING: Running fresh migration - this will destroy all data!"
+  ./migrate fresh
+  if [ "$RUN_SEEDER" = "true" ]; then
+    echo "🌱 Running database seeders..."
+    ./seeder
+  fi
+elif [ "$RUN_MIGRATE" = "true" ]; then
+  echo "📦 Running database migrations..."
+  ./migrate up
+  if [ "$RUN_SEEDER" = "true" ]; then
+    echo "🌱 Running database seeders..."
+    ./seeder
+  fi
+elif [ "$RUN_SEEDER" = "true" ]; then
   echo "🌱 Running database seeders..."
   ./seeder
 fi
