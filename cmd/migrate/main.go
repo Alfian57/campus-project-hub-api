@@ -20,7 +20,7 @@ func main() {
 	}
 
 	action := os.Args[1]
-	
+
 	// Parse additional flags
 	forceFlag := flag.NewFlagSet("force", flag.ExitOnError)
 	forceVersion := forceFlag.Int("version", -1, "Force set version (use with care!)")
@@ -105,8 +105,7 @@ func main() {
 }
 
 func printUsage() {
-	fmt.Println(`
-Campus Project Hub API - Migration Tool
+	fmt.Println(`Campus Project Hub API - Migration Tool
 
 Usage: ./migrate <action> [options]
 
@@ -123,6 +122,5 @@ Examples:
   ./migrate down
   ./migrate fresh
   ./migrate version
-  ./migrate force -version=3
-`)
+  ./migrate force -version=3`)
 }
